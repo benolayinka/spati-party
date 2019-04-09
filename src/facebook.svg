@@ -1,0 +1,10 @@
+<svg className="svg-mask" fill='white' xmlns="http://www.w3.org/2000/svg" viewbox="0 0 64 64" width="64px" height="64px">
+  <defs>
+    <clipPath id="circle-mask">
+      <circle cx="32" cy="32" r="32" />
+    </clipPath>
+  </defs>
+  <g>
+  <path clip-path="url(#circle-mask)" d="M0,0v64h64V0H0z M39.6,22l-2.8,0c-2.2,0-2.6,1.1-2.6,2.6V28h5.3l-0.7,5.3h-4.6V47h-5.5V33.3H24V28h4.6V24 c0-4.6,2.8-7,6.9-7c2,0,3.6,0.1,4.1,0.2V22z"></path>
+  </g>
+</svg>
