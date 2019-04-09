@@ -4,10 +4,12 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "homepage": "http://benolayinka.github.io/spati-party",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "2.1.8"
+    "react-scripts": "2.1.8",
+    "serve": "^11.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
