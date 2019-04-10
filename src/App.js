@@ -19,6 +19,7 @@ const bgStyle = {
   top:'0',
   left:'0',
   zIndex:'0',
+  transition:'opacity 1s cubic-bezier(.33,0,.2,1)',
 }
 
 function Background(props) {
@@ -38,6 +39,7 @@ const scrimStyle = {
   backgroundColor: 'rgb(64, 139, 108)',
   opacity: '0.3',
   zIndex: '1',
+  transition: 'background 170ms ease-out,opacity 170ms ease-out',
 }
 
 function Scrim(props) {
@@ -75,7 +77,6 @@ class ModalButtons extends Component {
       this.onClick = () => this.setState({ showEmail: true });
     }
     render() {
-      let child = <span><MailChimp/></span>;
       return (
         <Container>
           <Row style={{height:'120px'}}>
@@ -115,7 +116,7 @@ const MailChimp = function()
       <form action="https://party.us20.list-manage.com/subscribe/post?u=e00142d1ff08fb74ba4f294cf&amp;id=5638ffc338" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" target="_blank" noValidate>
           <div id="mc_embed_signup_scroll">
         
-      <div className="mc-field-group" className='flex-container' style={flexStyle}>
+      <div className="mc-field-group flex-container" style={flexStyle}>
         <label htmlFor="mce-EMAIL">email</label>
         <input type="email" name="EMAIL" className="required email" id="mce-EMAIL"/>
       </div>
@@ -124,7 +125,7 @@ const MailChimp = function()
           <div className="response" id="mce-success-response" style={hiddenStyle}></div>
         </div>
           <div style={posStyle} aria-hidden="true"><input type="text" name="b_e00142d1ff08fb74ba4f294cf_5638ffc338" tabIndex="-1"/></div>
-          <div className="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" className="btn"/></div>
+          <div className="clear"><input type="submit" value="get dat" name="getdat" id="mc-embedded-subscribe" className="btn"/></div>
           </div>
       </form>
     </div>
@@ -152,7 +153,7 @@ class VerticallyCenteredModal extends Component {
         centered
       >
         <Modal.Body>
-          <h2>how u wanna holla at Späti Party?</h2>
+          <h2>how u wanna holla at späti party?</h2>
           <p>
           </p>
           <ModalButtons/>
@@ -160,6 +161,12 @@ class VerticallyCenteredModal extends Component {
       </Modal>
     );
   }
+}
+
+const coverHeading = {
+  marginBottom: '2.5rem',
+  display: 'inline-block',
+  fontSize:'50px',
 }
 
 class Main extends Component {
@@ -171,7 +178,7 @@ class Main extends Component {
   let modalClose = () => this.setState({ modalShow: false });
   return (
     <main role="main" className="inner cover">
-      <h1 className="cover-heading">excuse me where da Späti party at?</h1>
+      <h1 style = {coverHeading}>excuse me where da späti party at?</h1>
       <p className="lead">
         <Button variant="primary" onClick={() => this.setState({ modalShow: true })}>
             Get da Location
@@ -208,12 +215,19 @@ const FacebookIcon = function(props){
 }
 
 const footerStyle = {
-  marginBottom:'50px',
+  position: 'absolute',
+  bottom:'0',
+  marginBottom:'20px',
+  width: '95%',
+  justifyContent: 'center',
 }
 
 function Footer() {
   return (
     <footer style={footerStyle} className="mastfoot mt-auto">
+      <div style={{marginBottom:'20px'}}>
+      <img src={aubergine} width='100px' className="App-logo" alt="logo" />
+      </div>
         <div className="inner">
           <FacebookIcon/>
         </div>
@@ -237,11 +251,8 @@ class App extends Component {
       <Scrim/>
       </div>
       <div className="fg cover-container d-flex h-100 p-3 mx-auto flex-column">
-        <header className="App-header">
-          <Main/>
-          <img src={aubergine} width='100px' className="App-logo" alt="logo" />
-          <Footer/>
-        </header>
+        <Main/>
+        <Footer/>
       </div>
     </div>
     );
