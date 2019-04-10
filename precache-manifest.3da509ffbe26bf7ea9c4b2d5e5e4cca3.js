@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "e012c5d8691f4fe7728d",
-    "url": "/spati-party/static/css/main.162eedf9.chunk.css"
+    "revision": "3be4f2996fbcee2869cc",
+    "url": "/spati-party/static/css/main.52c75580.chunk.css"
   },
   {
-    "revision": "e012c5d8691f4fe7728d",
-    "url": "/spati-party/static/js/main.705d6dcc.chunk.js"
+    "revision": "3be4f2996fbcee2869cc",
+    "url": "/spati-party/static/js/main.5b57dfde.chunk.js"
   },
   {
     "revision": "7ead2495574cb574d7e2",
@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "url": "/spati-party/static/media/background.87f6aa41.jpg"
   },
   {
-    "revision": "96a557e6e4aae8d9ec667e33931d8231",
+    "revision": "387b15527383617f7db07c6e073b4939",
     "url": "/spati-party/index.html"
   }
 ];
