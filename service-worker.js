@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/spati-party/precache-manifest.00cfaff19c902681d90b29d7fd1be478.js"
+  "/spati-party/precache-manifest.482852e241c31ff78c1c8bbe90e84a95.js"
 );
 
 workbox.clientsClaim();
