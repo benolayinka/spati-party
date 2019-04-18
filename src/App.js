@@ -9,11 +9,12 @@ import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { SocialIcon } from 'react-social-icons';
 
 const bgStyle = {
   width:'100%', 
   height:'100%',
-  objectPosition: '50% 50%',
+  objectPosition: '100% 100%',
   objectFit: 'cover',
   position:'absolute',
   top:'0',
@@ -37,7 +38,7 @@ const scrimStyle = {
   width: '100%',
   height: '100%',
   backgroundColor: 'rgb(64, 139, 108)',
-  opacity: '0.3',
+  opacity: '0.5',
   zIndex: '1',
   transition: 'background 170ms ease-out,opacity 170ms ease-out',
 }
@@ -207,7 +208,7 @@ const FacebookIcon = function(props){
             </clipPath>
           </defs>
           <g>
-          <path clip-path="url(#circle-mask)" d="M0,0v64h64V0H0z M39.6,22l-2.8,0c-2.2,0-2.6,1.1-2.6,2.6V28h5.3l-0.7,5.3h-4.6V47h-5.5V33.3H24V28h4.6V24 c0-4.6,2.8-7,6.9-7c2,0,3.6,0.1,4.1,0.2V22z"></path>
+          <path clipPath="url(#circle-mask)" d="M0,0v64h64V0H0z M39.6,22l-2.8,0c-2.2,0-2.6,1.1-2.6,2.6V28h5.3l-0.7,5.3h-4.6V47h-5.5V33.3H24V28h4.6V24 c0-4.6,2.8-7,6.9-7c2,0,3.6,0.1,4.1,0.2V22z"></path>
           </g>
         </svg>
         </a>
