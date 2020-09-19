@@ -176,6 +176,10 @@
 
 			import { GLTFLoader } from 'https://unpkg.com/three/examples/jsm/loaders/GLTFLoader.js';
 
+			import { MTLLoader } from 'https://unpkg.com/three/examples/jsm/loaders/MTLLoader.js';
+
+			import { OBJLoader } from 'https://unpkg.com/three/examples/jsm/loaders/OBJLoader.js';
+
 			import { RoughnessMipmapper } from 'https://unpkg.com/three/examples/jsm/utils/RoughnessMipmapper.js';
 
 			var container, controls, object;
@@ -218,46 +222,60 @@
 				controls.target.set( 0, 0, - 0.2 );
 				controls.update();
 
-				// Instantiate a loader
-				var loader = new GLTFLoader();
+				function loadAsset( asset ) {
 
-				// Load a glTF resource
-				loader.load(
-					// resource URL
-					'eggplant.gltf',
-					// called when the resource is loaded
-					function ( gltf ) {
+					var format = asset.formats.find( format => { return format.formatType === 'GLTF2'; } );
 
-						scene.add( gltf.scene );
+					if ( format !== undefined ) {
 
-						gltf.animations; // Array<THREE.AnimationClip>
-						gltf.scene; // THREE.Group
-						gltf.scenes; // Array<THREE.Group>
-						gltf.cameras; // Array<THREE.Camera>
-						gltf.asset; // Object
+						var url = format.root.url;
 
-						object = gltf.scene;
-						object.scale.multiplyScalar( 20 );
-						//object.position.y = - 30;
+						var loader = new GLTFLoader();
 
-						render()
+						loader.load(
+							// resource URL
+							url,
+							// called when the resource is loaded
+							function ( gltf ) {
 
-					},
-					// called while loading is progressing
-					function ( xhr ) {
+								scene.add( gltf.scene );
 
-						const element = document.getElementById("loading");
+								object = gltf.scene;
+								object.scale.multiplyScalar( 20 );
+								//object.position.y = - 30;
 
-						element.classList.add("hide");
-					},
+								render()
 
-					// called when loading has errors
-					function ( error ) {
+							},
+							// called while loading is progressing
+							function ( xhr ) {
 
-						console.log( 'An error happened' );
+								const element = document.getElementById("loading");
+
+								element.classList.add("hide");
+							},
+
+							// called when loading has errors
+							function ( error ) {
+
+								console.log( 'An error happened' );
+
+							}
+						);
 
 					}
-				);
+
+				}
+
+				const url = "https://poly.googleapis.com/v1/assets/5AW4hipBgK3?key=AIzaSyAU-IiyxLrcfA3tiXYh-cs_JSS0bFMhNrE"
+
+				var request = new XMLHttpRequest();
+				request.open( 'GET', url, true );
+				request.addEventListener( 'load', function ( event ) {
+					loadAsset( JSON.parse( event.target.response ) );
+
+				} );
+				request.send( null );
 
 				document.body.appendChild( renderer.domElement );
 
@@ -293,11 +311,8 @@
 				var time = Date.now() * 0.0005;
 				var delta = clock.getDelta();
 
-				//if ( object ) object.rotation.y -= 0.1 * delta;
-
 				light1.position.x = Math.sin( time * 5 ) * 20;
 				light1.position.y = Math.cos( time * 5 ) * 20 - 2 * Math.cos(time);
-				//light1.position.z = Math.cos( time * 0.3 ) * 30;
 				light1.position.z = Math.cos( time ) * 35 - 10;
 
 			}
