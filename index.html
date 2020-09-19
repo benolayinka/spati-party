@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>spati party</title>
+		<title>späti party</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
 		<link rel="shortcut icon" href="favicon.ico"/>
+		<link rel="apple-touch-icon-precomposed"
+    sizes="144x144" href="favicon-apple-touch-144.png">
+    	<link rel="icon" sizes="128x128" href="favicon.icns">
 
 		<link rel="manifest" href="manifest.json"/>
 
@@ -14,6 +17,7 @@
 
   		<!-- Bootstrap -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
 		<link type="text/css" rel="stylesheet" href="main.css">
 	</head>
 
@@ -24,6 +28,18 @@
 			  get da location
 			</button>
 		</div>
+
+		<h1 id="loading" class="loading absolute-center">loading</h1>
+
+		<footer class="fixed-bottom center">
+			<div class="container">
+				<div class="d-flex justify-content-center">
+					<a href="https://www.facebook.com/spaeti180/">
+						<i class="material-icons display-4">facebook</i>
+					</a>
+				</div>
+			</div>
+		</footer>
 
 		<!-- Modal -->
 		<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
@@ -126,9 +142,11 @@
 					// called while loading is progressing
 					function ( xhr ) {
 
-						console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+						const element = document.getElementById("loading");
 
+						element.classList.add("hide");
 					},
+					
 					// called when loading has errors
 					function ( error ) {
 
