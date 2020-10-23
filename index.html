@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>späti party</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+		<link rel="shortcut icon" href="favicon.ico"/>
+		<link rel="apple-touch-icon-precomposed"
+    sizes="144x144" href="favicon-apple-touch-144.png">
+    	<link rel="icon" sizes="128x128" href="favicon.icns">
+
+		<link rel="manifest" href="manifest.json"/>
+
+  		<!-- Material Icons -->
+  		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+		<style>
+		body {
+			margin: 0;
+			background-image: url("banner.jpg");
+			background-position: center; /* Center the image */
+		  	background-repeat: no-repeat; /* Do not repeat the image */
+		  	background-size: cover; /* Resize the background image to cover the entire container */
+			background-color: #F3BEBD;
+			color: #fff;
+			font-family: Monospace;
+			font-size: 13px;
+			line-height: 24px;
+			overscroll-behavior: none;
+			height: 100vh;
+			width: 100vw;
+		}
+
+		a {
+			color: #fff;
+			text-decoration: none;
+		}
+
+		a:hover {
+			color: #fff;
+			text-decoration: underline;
+		}
+
+		button {
+			cursor: pointer;
+			text-transform: uppercase;
+		}
+
+		.info {
+			position: absolute;
+			top: 0px;
+			width: 100%;
+			padding: 10px;
+			box-sizing: border-box;
+			text-align: center;
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			pointer-events: none;
+			z-index: 1; /* TODO Solve this in HTML */
+		}
+
+		canvas {
+			display: block;
+		}
+
+		a, button, input, select {
+			pointer-events: auto;
+		}
+
+		.modal-backdrop {
+		   background-color: red;
+		}
+
+		.modal-body {
+			background-color: red; 
+		}
+
+		.material-icons{
+		    display: inline-flex;
+		    vertical-align: top;
+		}
+
+		.absolute-center {
+		  	text-align: center;
+		    position: absolute;
+		    top: 50%;
+		    left: 50%;
+		    transform: translate(-50%, -50%);
+		}
+
+		.loading:after {
+		  content: ' .';
+		  animation: dots 1s steps(5, end) infinite;
+		}
+
+		.hide {
+			display: none;
+		}
+
+		@keyframes dots {
+		  0%, 20% {
+		    color: rgba(0,0,0,0);
+		    text-shadow:
+		      .25em 0 0 rgba(0,0,0,0),
+		      .5em 0 0 rgba(0,0,0,0);}
+		  40% {
+		    color: white;
+		    text-shadow:
+		      .25em 0 0 rgba(0,0,0,0),
+		      .5em 0 0 rgba(0,0,0,0);}
+		  60% {
+		    text-shadow:
+		      .25em 0 0 white,
+		      .5em 0 0 rgba(0,0,0,0);}
+		  80%, 100% {
+		    text-shadow:
+		      .25em 0 0 white,
+		      .5em 0 0 white;}}
+		</style>
+	</head>
+
+	<body>
+		<div class="info">
+			<h1>excuse me where da späti party at</h1>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">
+			  get da location
+			</button>
+		</div>
+
+		<h1 id="loading" class="loading absolute-center">loading</h1>
+
+		<footer class="fixed-bottom center">
+			<div class="container">
+				<div class="d-flex justify-content-center">
+					<a href="https://www.facebook.com/spaeti180/">
+						<i class="material-icons display-4">facebook</i>
+					</a>
+				</div>
+			</div>
+		</footer>
+
+		<!-- Modal -->
+		<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-body">
+		        <h5>how u wanna holla at späti party?</h5>
+		        <div>
+		        <a href="https://t.me/spatiparty">
+		        	<i class="material-icons">send</i>
+		        	<span class="telegram-text">telegram</span>
+		        </a>
+		    	</div>
+		    	<div>
+		        <a href="http://eepurl.com/gnrReb">
+		        	<i class="material-icons">email</i>
+		        	<span class="email-text">email</span>
+		    	</a>
+		    	</div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+		<script type="module">
+
+			import * as THREE from 'https://unpkg.com/three/build/three.module.js';
+
+			import { OrbitControls } from 'https://unpkg.com/three/examples/jsm/controls/OrbitControls.js';
+
+			import { GLTFLoader } from 'https://unpkg.com/three/examples/jsm/loaders/GLTFLoader.js';
+
+			import { MTLLoader } from 'https://unpkg.com/three/examples/jsm/loaders/MTLLoader.js';
+
+			import { OBJLoader } from 'https://unpkg.com/three/examples/jsm/loaders/OBJLoader.js';
+
+			import { RoughnessMipmapper } from 'https://unpkg.com/three/examples/jsm/utils/RoughnessMipmapper.js';
+
+			var container, controls, object;
+			var camera, scene, renderer, light1, light2, light3, light4;
+
+			var clock = new THREE.Clock();
+
+			init();
+			animate();
+
+			function init() {
+
+				scene = new THREE.Scene();
+
+				var light = new THREE.AmbientLight( 0xFFFFFF ); // soft white light
+				scene.add( light );
+
+				var sphere = new THREE.SphereBufferGeometry( 0.5, 16, 8 );
+
+				//lights
+
+				light1 = new THREE.PointLight( 0xff0040, 10, 30 );
+				light1.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xff0040 } ) ) );
+				scene.add( light1 );
+
+				var directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
+				scene.add( directionalLight );
+
+				light2 = new THREE.PointLight( 0xffffff, 5, 30 );
+				//light2.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xff0040 } ) ) );
+				scene.add( light2 )
+				light2.position.y += 20
+				light2.position.x -= 20
+
+				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1000 );
+
+				camera.position.z = 100;
+
+				renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				controls = new OrbitControls( camera, renderer.domElement );
+				controls.addEventListener( 'change', render ); // use if there is no animation loop
+				//controls.minDistance = 2;
+				//controls.maxDistance = 10;
+				controls.autoRotate = true
+				controls.enableDamping = true
+				controls.target.set( 0, 0, - 0.2 );
+				controls.update();
+
+				function loadAsset( asset ) {
+
+					var format = asset.formats.find( format => { return format.formatType === 'GLTF2'; } );
+
+					if ( format !== undefined ) {
+
+						var url = format.root.url;
+
+						var loader = new GLTFLoader();
+
+						loader.load(
+							// resource URL
+							url,
+							// called when the resource is loaded
+							function ( gltf ) {
+
+								scene.add( gltf.scene );
+
+								object = gltf.scene;
+								object.scale.multiplyScalar( 20 );
+								//object.position.y = - 30;
+
+								render()
+
+							},
+							// called while loading is progressing
+							function ( xhr ) {
+
+								const element = document.getElementById("loading");
+
+								element.classList.add("hide");
+							},
+
+							// called when loading has errors
+							function ( error ) {
+
+								console.log( 'An error happened' );
+
+							}
+						);
+
+					}
+
+				}
+
+				const url = "https://poly.googleapis.com/v1/assets/5AW4hipBgK3?key=AIzaSyAU-IiyxLrcfA3tiXYh-cs_JSS0bFMhNrE"
+
+				var request = new XMLHttpRequest();
+				request.open( 'GET', url, true );
+				request.addEventListener( 'load', function ( event ) {
+					loadAsset( JSON.parse( event.target.response ) );
+
+				} );
+				request.send( null );
+
+				document.body.appendChild( renderer.domElement );
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				render();
+
+			}
+
+			function animate() {
+
+				controls.update();
+
+				requestAnimationFrame( animate );
+
+				render();
+
+			}
+
+			function render() {
+
+				renderer.render( scene, camera );
+
+				var time = Date.now() * 0.0005;
+				var delta = clock.getDelta();
+
+				light1.position.x = Math.sin( time * 5 ) * 20;
+				light1.position.y = Math.cos( time * 5 ) * 20 - 2 * Math.cos(time);
+				light1.position.z = Math.cos( time ) * 35 - 10;
+
+			}
+
+		</script>
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	</body>
+</html>
