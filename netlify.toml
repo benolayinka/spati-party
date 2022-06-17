@@ -2,10 +2,10 @@
 from = "/"
 to = "https://linktree.com/spatiparty"
 status = 301
-force = true
+force = false
 
 [[redirects]]
 from = "https://spati.party"
 to = "https://linktree.com/spatiparty"
 status = 301
-force = true
+force = false
